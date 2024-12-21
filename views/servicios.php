@@ -1,16 +1,19 @@
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
 </head>
+
 <body>
     <h2>Manejo de Estudiantes</h2>
-    
+
     <table id="dg" title="Estudiantes" class="easyui-datagrid" style="width:700px;height:250px"
-            url="models/acceder.php"
-            toolbar="#toolbar" pagination="true"
-            rownumbers="true" fitColumns="true" singleSelect="true">
+        url="models/acceder.php"
+        toolbar="#toolbar" pagination="true"
+        rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
             <tr>
                 <th field="CED_EST" width="50">Cedula</th>
@@ -23,17 +26,17 @@
         </thead>
     </table>
     <div id="toolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">Nuevo Estudiante</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Editar Estudiante</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Eliminar Estudiante</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="checkLogin('newUser')">Nuevo Estudiante</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="checkLogin('editUser')">Editar Estudiante</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="checkLogin('destroyUser')">Eliminar Estudiante</a>
 
-        <!-- Nuevo contenido añadido -->
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generatePDF()">Generar Reporte FPDF</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generateIReport()">Generar Reporte Ireport</a>
+
         <input id="cedulaInput" class="easyui-textbox" prompt="Ingrese Cédula" style="width:150px;">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generatePDFByCedula()">Generar PDF por Cédula</a>
     </div>
-    
+
     <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
         <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
             <h3>Datos Estudiante</h3>
@@ -47,7 +50,7 @@
                 <input name="apellido" class="easyui-textbox" required="true" label="Apellido:" style="width:100%">
             </div>
             <div style="margin-bottom:10px">
-                <input name="telefono" class="easyui-textbox" required="true"  label="Telefono:" style="width:100%">
+                <input name="telefono" class="easyui-textbox" required="true" label="Telefono:" style="width:100%">
             </div>
             <div style="margin-bottom:10px">
                 <input name="direccion" class="easyui-textbox" required="true" label="Direccion:" style="width:100%">
@@ -60,11 +63,28 @@
     </div>
     <script type="text/javascript">
         var url;
-        function newUser(){
-            $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Estudiante');
+
+        function checkLogin(action) {
+            <?php if (!isset($_SESSION['usuario'])): ?>
+                alert('Debes iniciar sesión para realizar esta acción');
+                window.location.href = 'index.php?action=login';
+            <?php else: ?>
+                if (action === 'newUser') {
+                    newUser();
+                } else if (action === 'editUser') {
+                    editUser();
+                } else if (action === 'destroyUser') {
+                    destroyUser();
+                }
+            <?php endif; ?>
+        }
+
+        function newUser() {
+            $('#dlg').dialog('open').dialog('center').dialog('setTitle', 'Nuevo Estudiante');
             $('#fm').form('clear');
             url = 'models/guardar.php';
         }
+
         function editUser() {
             var row = $('#dg').datagrid('getSelected'); // Declarar y obtener la fila seleccionada
             if (row) {
@@ -80,57 +100,61 @@
             }
         }
 
-        function saveUser(){
-            $('#fm').form('submit',{
+        function saveUser() {
+            $('#fm').form('submit', {
                 url: url,
                 iframe: false,
-                onSubmit: function(){
+                onSubmit: function() {
                     return $(this).form('validate');
                 },
-                success: function(result){
-                    var result = eval('('+result+')');
-                    if (result.errorMsg){
+                success: function(result) {
+                    var result = eval('(' + result + ')');
+                    if (result.errorMsg) {
                         $.messager.show({
                             title: 'Error',
                             msg: result.errorMsg
                         });
                     } else {
-                        $('#dlg').dialog('close');        // close the dialog
-                        $('#dg').datagrid('reload');    // reload the user data
+                        $('#dlg').dialog('close'); // close the dialog
+                        $('#dg').datagrid('reload'); // reload the user data
                     }
                 }
             });
         }
-        function destroyUser(){
+
+        function destroyUser() {
             var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('Confirmar','Esta seguro de Eliminar este estudiante?',function(r){
-                    if (r){
-                        $.get('models/eliminar.php',{cedula:row.CED_EST},function(result){
-                            if (result.success){
-                                $.messager.show({    // show error message
+            if (row) {
+                $.messager.confirm('Confirmar', 'Esta seguro de Eliminar este estudiante?', function(r) {
+                    if (r) {
+                        $.get('models/eliminar.php', {
+                            cedula: row.CED_EST
+                        }, function(result) {
+                            if (result.success) {
+                                $.messager.show({ // show error message
                                     title: 'Error, no se pudo borrar',
                                     msg: result.errorMsg
                                 });
                             } else {
-                                $('#dg').datagrid('reload');    // reload the user data
+                                $('#dg').datagrid('reload'); // reload the user data
 
                             }
-                        },'json');
+                        }, 'json');
                     }
                 });
             }
         }
 
-        function generatePDF(){
-                window.location.href = 'reporte.php';
+        function generatePDF() {
+            window.location.href = 'reporte.php';
         }
-        function generateIReport(){
-    window.location.href = 'reportes.php';
-}
+
+        function generateIReport() {
+            window.location.href = 'reportes.php';
+        }
 
 
-        function generatePDFByCedula(){
+        function generatePDFByCedula() {
             var cedula = $('#cedulaInput').val();
             if (cedula) {
                 window.location.href = 'report_fpdf.php?cedula=' + encodeURIComponent(cedula);
@@ -140,4 +164,5 @@
         }
     </script>
 </body>
+
 </html>
