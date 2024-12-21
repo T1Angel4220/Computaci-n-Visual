@@ -15,10 +15,9 @@ if (isset($_GET['logout'])) {
 }
 ?>
 
-
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="Css/estilo.css">
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="jquery/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="jquery/themes/icon.css">
@@ -28,39 +27,32 @@ if (isset($_GET['logout'])) {
 </head>
 
 <body>
-    <!-- Header con información del usuario o botón de login -->
-    <header>
-        <div class="header-container">
-            <!-- Si el usuario está logueado -->
-            <?php if (isset($_SESSION['usuario'])): ?>
-                <div class="user-info">
-                    <span>Bienvenido, <?php echo $_SESSION['usuario']; ?> </span>
-					<a href="?logout=true">Cerrar sesión</a>
-                </div>
-            <?php else: ?>
-                <!-- Si el usuario NO está logueado -->
-                <a href="index.php?action=login" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn-login">Iniciar sesión</a>
-            <?php endif; ?>
-        </div>
-        <img src="images/logo.jpg" width="100%" alt="Logo">
-    </header>
-
     <!-- Navegación -->
     <nav>
-        <ul>
+    <ul>
+        <!-- Botones Centrados -->
+        <div class="nav-items">
             <li><a href="index.php?action=inicio">Inicio</a></li>
             <li><a href="index.php?action=nosotros">Nosotros</a></li>
             <li><a href="index.php?action=servicios">Servicios</a></li>
             <li><a href="index.php?action=contactanos">Contactanos</a></li>
-        </ul>
-    </nav>
+        </div>
+        <!-- Botón de Login a la derecha -->
+        <?php if (isset($_SESSION['usuario'])): ?>
+            <li class="nav-login"><a href="?logout=true">Cerrar sesión</a></li>
+        <?php else: ?>
+            <li class="nav-login"><a href="index.php?action=login">Iniciar sesión</a></li>
+        <?php endif; ?>
+    </ul>
+</nav>
+
 
     <!-- Sección de contenido -->
     <section>
         <?php
         require_once "controllers/controller.php";
         require_once "models/model.php";
-        
+
         $mvc = new mvcController();
         $mvc->enlacesPaginasController();
         ?>
@@ -68,7 +60,7 @@ if (isset($_GET['logout'])) {
 
     <!-- Footer -->
     <footer>
-        Derechos Reservados @cuartoSoftware
+        <p>Derechos Reservados @cuartoSoftware</p>
     </footer>
 </body>
 </html>
