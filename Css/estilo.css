@@ -1,0 +1,53 @@
+header{
+    position: relative;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+}
+nav{
+    position: relative;
+    margin: auto;
+    width: 90%;
+    height: auto;
+    background: #991c24;
+    padding: 10px;
+}
+nav ul{
+    position: relative;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+nav ul li{
+    display: inline-block;
+    margin: auto;
+    width: 20%;
+    list-style: none;
+    color: white;
+}
+nav ul li a{
+    color: white;
+    text-decoration: none;
+}
+section{
+    position: relative;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+footer{
+    position: relative;
+    margin: auto;
+    width: 90%;
+    height: auto;
+    background: #991c24;
+    color: white;
+    padding: 10px;
+    font-size: xx-large;
+    text-align: center;    
+}
+
+.parrafo{
+    color: red;
+    font-size: x-large;
+}

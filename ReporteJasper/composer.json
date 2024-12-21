@@ -1,0 +1,17 @@
+{
+    "name": "acer_2023/reporte-jasper",
+    "autoload": {
+        "psr-4": {
+            "Acer2023\\ReporteJasper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "T1Angel4220",
+            "email": "aayuquina4220@uta.edu.ec"
+        }
+    ],
+    "require": {
+        "cossou/jasperphp": "^2.8"
+    }
+}

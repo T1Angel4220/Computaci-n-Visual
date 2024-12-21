@@ -1,0 +1,5 @@
+{
+    "require": {
+        "cossou/jasperphp": "^2.8"
+    }
+}
