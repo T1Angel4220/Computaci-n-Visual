@@ -1,66 +1,71 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <link rel="stylesheet" type="text/css" href="Css/estilo.css">
+    
 </head>
 
 <body>
-    <h2>Manejo de Estudiantes</h2>
+    <div class="cards-section">
+        <h2>Manejo de Estudiantes</h2>
+        <div style="width: 80%; max-width: 900px; margin: 0 auto; overflow-x: auto;">
+        <table id="dg" title="Estudiantes" class="easyui-datagrid" style="width:700px;height:250px; margin: 0 auto;"
+            url="models/acceder.php"
+            toolbar="#toolbar" pagination="true"
+            rownumbers="true" fitColumns="true" singleSelect="true">
+            <thead>
+                <tr>
+                    <th field="CED_EST" width="50">Cedula</th>
+                    <th field="NOM_EST" width="50">Nombre</th>
+                    <th field="APE_EST" width="50">Apellido</th>
+                    <th field="DIR_EST" width="50">Direccion</th>
+                    <th field="TEL_EST" width="50">Telefono</th>
 
-    <table id="dg" title="Estudiantes" class="easyui-datagrid" style="width:700px;height:250px"
-        url="models/acceder.php"
-        toolbar="#toolbar" pagination="true"
-        rownumbers="true" fitColumns="true" singleSelect="true">
-        <thead>
-            <tr>
-                <th field="CED_EST" width="50">Cedula</th>
-                <th field="NOM_EST" width="50">Nombre</th>
-                <th field="APE_EST" width="50">Apellido</th>
-                <th field="DIR_EST" width="50">Direccion</th>
-                <th field="TEL_EST" width="50">Telefono</th>
+                </tr>
+            </thead>
+        </table>
+        </div>
+        <div id="toolbar">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="checkLogin('newUser')">Nuevo Estudiante</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="checkLogin('editUser')">Editar Estudiante</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="checkLogin('destroyUser')">Eliminar Estudiante</a>
 
-            </tr>
-        </thead>
-    </table>
-    <div id="toolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="checkLogin('newUser')">Nuevo Estudiante</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="checkLogin('editUser')">Editar Estudiante</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="checkLogin('destroyUser')">Eliminar Estudiante</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generatePDF()">Generar Reporte FPDF</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generateIReport()">Generar Reporte Ireport</a>
 
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generatePDF()">Generar Reporte FPDF</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generateIReport()">Generar Reporte Ireport</a>
+            <input id="cedulaInput" class="easyui-textbox" prompt="Ingrese Cédula" style="width:150px;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generatePDFByCedula()">Generar PDF por Cédula</a>
+        </div>
 
-        <input id="cedulaInput" class="easyui-textbox" prompt="Ingrese Cédula" style="width:150px;">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generatePDFByCedula()">Generar PDF por Cédula</a>
+        <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
+            <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
+                <h3>Datos Estudiante</h3>
+                <div style="margin-bottom:10px">
+                    <input name="cedula" class="easyui-textbox" required="true" label="Cedula:" style="width:100%" onkeypress="return /[0-9]/.test(event.key)">
+                </div>
+                <div style="margin-bottom:10px">
+                    <input name="nombre" class="easyui-textbox" required="true" label="Nombre:" style="width:100%" onkeypress="return /[a-zA-Z\s]/.test(event.key)">
+                </div>
+                <div style="margin-bottom:10px">
+                    <input name="apellido" class="easyui-textbox" required="true" label="Apellido:" style="width:100%" onkeypress="return /[a-zA-Z\s]/.test(event.key)">
+                </div>
+                <div style="margin-bottom:10px">
+                    <input name="direccion" class="easyui-textbox" required="true" label="Direccion:" style="width:100%" onkeypress="return /[a-zA-Z0-9\s]/.test(event.key)">
+                </div>
+                <div style="margin-bottom:10px">
+                    <input name="telefono" class="easyui-textbox" required="true" label="Telefono:" style="width:100%" onkeypress="return /[0-9]/.test(event.key)">
+                </div>
+            </form>
+        </div>
+        <div id="dlg-buttons">
+            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">Guardar</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
+        </div>
     </div>
-
-    <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
-        <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
-            <h3>Datos Estudiante</h3>
-            <div style="margin-bottom:10px">
-                <input name="cedula" class="easyui-textbox" required="true" label="Cedula:" style="width:100%">
-            </div>
-            <div style="margin-bottom:10px">
-                <input name="nombre" class="easyui-textbox" required="true" label="Nombre:" style="width:100%">
-            </div>
-            <div style="margin-bottom:10px">
-                <input name="apellido" class="easyui-textbox" required="true" label="Apellido:" style="width:100%">
-            </div>
-            <div style="margin-bottom:10px">
-                <input name="telefono" class="easyui-textbox" required="true" label="Telefono:" style="width:100%">
-            </div>
-            <div style="margin-bottom:10px">
-                <input name="direccion" class="easyui-textbox" required="true" label="Direccion:" style="width:100%">
-            </div>
-        </form>
-    </div>
-    <div id="dlg-buttons">
-        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">Guardar</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
-    </div>
+    
     <script type="text/javascript">
         var url;
 
@@ -152,7 +157,6 @@
         function generateIReport() {
             window.location.href = 'reportes.php';
         }
-
 
         function generatePDFByCedula() {
             var cedula = $('#cedulaInput').val();

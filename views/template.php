@@ -27,6 +27,7 @@ if (isset($_GET['logout'])) {
 </head>
 
 <body>
+
     <!-- Navegación -->
     <nav>
     <ul>
@@ -35,11 +36,13 @@ if (isset($_GET['logout'])) {
             <li><a href="index.php?action=inicio">Inicio</a></li>
             <li><a href="index.php?action=nosotros">Nosotros</a></li>
             <li><a href="index.php?action=servicios">Servicios</a></li>
-            <li><a href="index.php?action=contactanos">Contactanos</a></li>
+            <li><a href="index.php?action=contactanos">Contáctanos</a></li>
         </div>
-        <!-- Botón de Login a la derecha -->
         <?php if (isset($_SESSION['usuario'])): ?>
-            <li class="nav-login"><a href="?logout=true">Cerrar sesión</a></li>
+            <div class="user-welcome">
+            <span>Bienvenido, <strong><?php echo htmlspecialchars($_SESSION['usuario']); ?></strong></span>
+        </div>
+    <li class="nav-login"><a href="?logout=true">Cerrar sesión</a></li>
         <?php else: ?>
             <li class="nav-login"><a href="index.php?action=login">Iniciar sesión</a></li>
         <?php endif; ?>

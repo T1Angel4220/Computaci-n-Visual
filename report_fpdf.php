@@ -6,10 +6,10 @@ if (isset($_GET['cedula']) && !empty($_GET['cedula'])) {
     $cedula = htmlspecialchars($_GET['cedula']);
 
     // Configuración de la base de datos
-    $servername = "localhost:3309";
+    $servername = "localhost:3307";
     $username = "root";
     $password = "";
-    $dbname = "cuarto"; // Cambia esto por el nombre de tu base de datos
+    $dbname = "cuarto1"; // Cambia esto por el nombre de tu base de datos
 
     // Conexión a la base de datos
     $conn = new mysqli($servername, $username, $password, $dbname);
