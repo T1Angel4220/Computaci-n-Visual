@@ -24,6 +24,7 @@ if (isset($_GET['logout'])) {
     <link rel="stylesheet" type="text/css" href="jquery/themes/color.css">
     <script type="text/javascript" src="jquery/jquery.min.js"></script>
     <script type="text/javascript" src="jquery/jquery.easyui.min.js"></script>
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
 </head>
 
 <body>

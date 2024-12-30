@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <title>Servicios</title>
     <link rel="stylesheet" type="text/css" href="Css/estilo.css">
-    
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
 </head>
 
 <body>
