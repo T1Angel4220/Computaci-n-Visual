@@ -4,10 +4,10 @@ class Conexion{
 
     public function conectar(){
 
-        $serverName = "localhost:3307";
+        $serverName = "localhost:3309";
         $userName = "root";
         $password = "";
-        $db = "cuarto1";
+        $db = "cuarto";
         $conn = mysqli_connect($serverName, $userName, $password, $db);
 
         if (!$conn){

@@ -398,3 +398,44 @@ footer {
     overflow-y: auto;
     max-height: 400px; 
 }
+.panel-header, .panel-body {
+    border-color : #000000;
+}
+.panel-title {
+
+    color: #000;
+
+}
+
+.datagrid-header, .datagrid-toolbar, .datagrid-pager, .datagrid-footer-inner {
+    border-color: #000000;
+}
+
+.datagrid-toolbar, .datagrid-pager {
+    background: #f10000;
+}
+
+
+.l-btn {
+    color: #fff;
+    background: #f10000;
+}
+
+.panel-body {
+    background-color: #ffffff;
+    color: #fff;
+    font-size: 12px;
+}
+
+.pagination span {
+    font-size: 12px;
+    color: white;
+}
+.textbox .textbox-prompt {
+    font-size: 12px;
+    color: #000;
+}
+.datagrid-htable, .datagrid-btable, .datagrid-ftable {
+    color: #000;
+    border-collapse: separate;
+}

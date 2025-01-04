@@ -11,7 +11,7 @@
 <body>
     <div class="cards-section">
         <h2>Manejo de Estudiantes</h2>
-        <div style="width: 80%; max-width: 900px; margin: 0 auto; overflow-x: auto;">
+        <div style="width: 80%; max-width: 900px; margin: 0 auto; overflow-x: auto; margin-left: 28.5%;">
         <table id="dg" title="Estudiantes" class="easyui-datagrid" style="width:700px;height:250px; margin: 0 auto;"
             url="models/acceder.php"
             toolbar="#toolbar" pagination="true"
@@ -36,7 +36,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generatePDF()">Generar Reporte FPDF</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generateIReport()">Generar Reporte Ireport</a>
 
-            <input id="cedulaInput" class="easyui-textbox" prompt="Ingrese Cédula" style="width:150px;">
+            <input id="cedulaInput" class="easyui-textbox" prompt="Ingrese su Cédula" style="width:150px;">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="generatePDFByCedula()">Generar PDF por Cédula</a>
         </div>
 

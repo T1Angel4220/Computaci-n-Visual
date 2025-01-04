@@ -60,7 +60,7 @@ if (isset($_GET['logout'])) {
 
     <!-- Footer -->
     <footer>
-        <p>Derechos Reservados @cuartoSoftware</p>
+        <p>Derechos Reservados @Los Homofóbicos</p>
     </footer>
 </body>
 </html>

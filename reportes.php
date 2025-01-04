@@ -8,8 +8,8 @@ $jasper = __DIR__ . '/reports/reporteEstudiantes.jasper';
 
 // Configuración de la base de datos
 $db_host = "localhost";
-$db_port = "3307"; // Cambia esto si usas un puerto diferente
-$db_name = "cuarto1";
+$db_port = "3309"; // Cambia esto si usas un puerto diferente
+$db_name = "cuarto";
 $db_user = "root";
 $db_password = "";
 
