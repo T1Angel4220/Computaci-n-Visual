@@ -31,25 +31,21 @@ if (isset($_GET['logout'])) {
 
     <!-- Navegación -->
     <nav>
-    <ul>
-        <!-- Botones Centrados -->
-        <div class="nav-items">
-            <li><a href="index.php?action=inicio">Inicio</a></li>
-            <li><a href="index.php?action=nosotros">Nosotros</a></li>
-            <li><a href="index.php?action=servicios">Servicios</a></li>
-            <li><a href="index.php?action=contactanos">Contáctanos</a></li>
-        </div>
+    <ul class="nav-items">
+        <li><a href="index.php?action=inicio">Inicio</a></li>
+        <li><a href="index.php?action=nosotros">Nosotros</a></li>
+        <li><a href="index.php?action=servicios">Servicios</a></li>
+        <li><a href="index.php?action=contactanos">Contáctanos</a></li>
         <?php if (isset($_SESSION['usuario'])): ?>
             <div class="user-welcome">
-            <span>Bienvenido, <strong><?php echo htmlspecialchars($_SESSION['usuario']); ?></strong></span>
-        </div>
-    <li class="nav-login"><a href="?logout=true">Cerrar sesión</a></li>
+                <span>Bienvenido, <strong><?php echo htmlspecialchars($_SESSION['usuario']); ?></strong></span>
+            </div>
+            <li class="nav-login"><a href="?logout=true">Cerrar sesión</a></li>
         <?php else: ?>
             <li class="nav-login"><a href="index.php?action=login">Iniciar sesión</a></li>
         <?php endif; ?>
     </ul>
 </nav>
-
 
     <!-- Sección de contenido -->
     <section>
