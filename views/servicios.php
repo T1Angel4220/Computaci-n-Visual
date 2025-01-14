@@ -49,21 +49,26 @@
                 Ocurrió un error. Intenta nuevamente.
             </div>
 
-                <h3>Datos Estudiante</h3>
+            <h3>Datos Estudiante</h3>
                 <div class="form-field" style="margin-bottom:10px">
-                    <input name="cedula" class="easyui-textbox" required="true" label="Cedula:" style="width:100%" oninput="validateCedula(this)">
+                    <input name="cedula" class="easyui-textbox" required="true" label="Cédula:" style="width:100%" 
+                        validType="cedulaValid" data-options="prompt:'Ingrese 10 dígitos numéricos'">
                 </div>
                 <div class="form-field" style="margin-bottom:10px">
-                    <input name="nombre" class="easyui-textbox" required="true" label="Nombre:" style="width:100%" oninput="validateLetters(this)">
+                    <input name="nombre" class="easyui-textbox" required="true" label="Nombre:" style="width:100%" 
+                    validType="lettersWithAccents" data-options="prompt:'Solo letras'">
                 </div>
                 <div class="form-field" style="margin-bottom:10px">
-                    <input name="apellido" class="easyui-textbox" required="true" label="Apellido:" style="width:100%"oninput="validateLetters(this)">
+                    <input name="apellido" class="easyui-textbox" required="true" label="Apellido:" style="width:100%" 
+                    validType="lettersWithAccents" data-options="prompt:'Solo letras'">
                 </div>
                 <div class="form-field" style="margin-bottom:10px">
-                    <input name="direccion" class="easyui-textbox" required="true" label="Direccion:" style="width:100%"oninput="validateAlphanumeric(this)">
+                    <input name="direccion" class="easyui-textbox" label="Dirección:" style="width:100%" 
+                        data-options="prompt:'Ingrese la dirección'">
                 </div>
                 <div class="form-field" style="margin-bottom:10px">
-                    <input name="telefono" class="easyui-textbox" required="true" label="Telefono:" style="width:100%" oninput="validateCedula(this)">
+                    <input name="telefono" class="easyui-textbox" required="true" label="Teléfono:" style="width:100%" 
+                        validType="telefonoValid" data-options="prompt:'Ingrese 10 dígitos numéricos'">
                 </div>
             </form>
         </div>

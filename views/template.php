@@ -19,6 +19,7 @@ if (isset($_GET['logout'])) {
 <head>
     <link rel="stylesheet" type="text/css" href="Css/estilo.css">
     <meta charset="UTF-8">
+    
     <link rel="stylesheet" type="text/css" href="jquery/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="jquery/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="jquery/themes/color.css">

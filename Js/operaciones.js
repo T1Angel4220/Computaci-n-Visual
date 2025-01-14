@@ -2,7 +2,7 @@ var url;
 
 function checkLogin(action) {
     if (!window.isLoggedIn) {
-        showErrorMessage('Debes iniciar sesión para realizar esta acción', false);
+        $.messager.alert('Error', 'Debes iniciar sesión para realizar esta acción', 'warning');
         
         setTimeout(function() {
             window.location.href = 'index.php?action=login';
@@ -51,54 +51,27 @@ function editUser() {
 
         url = 'models/actualizar.php?cedula=' + row.CED_EST; 
     } else {
-        showErrorMessage('Por favor, seleccione un estudiante de la tabla para editar.',false);
+        $.messager.alert('Advertencia', 'Por favor, seleccione un estudiante de la tabla para editar.', 'warning');
     }
 }
 
-
 function saveUser() {
-    if (!$('#fm [name="cedula"]').val()) {
-        showErrorMessage("Por favor, ingrese la cédula.",true);
-        $('#fm [name="cedula"]').focus();
-        return false;
-    } else if (!validateDigitos($('#fm [name="cedula"]')[0])) {
-        showErrorMessage("La cédula no es válida, debe ser 10 dígitos numéricos.",true);
-        $('#fm [name="cedula"]').focus();
-        return false;
-    }
-
-    if (!$('#fm [name="nombre"]').val()) {
-        showErrorMessage("Por favor, ingrese el nombre.",true);
-        $('#fm [name="nombre"]').focus();
-        return false;
-    } else if (!validateLetters($('#fm [name="nombre"]')[0])) {
-        showErrorMessage("El nombre no es válido, deben ser letras.",true);
-        $('#fm [name="nombre"]').focus();
-        return false;
-    }
-
-    if (!$('#fm [name="apellido"]').val()) {
-        showErrorMessage("Por favor, ingrese el apellido.",true);
-        $('#fm [name="apellido"]').focus();
-        return false;
-    } else if (!validateLetters($('#fm [name="apellido"]')[0])) {
-        showErrorMessage("El apellido no es válido, deben ser letras.",true);
-        $('#fm [name="apellido"]').focus();
-        return false;
-    }
-
-    if (!$('#fm [name="telefono"]').val()) {
-        showErrorMessage("Por favor, ingrese el teléfono.",true);
-        $('#fm [name="telefono"]').focus();
-        return false;
-    } else if (!validateDigitos($('#fm [name="telefono"]')[0])) {
-        showErrorMessage("El teléfono no es válido, debe ser 10 dígitos numéricos.",true);
-        $('#fm [name="telefono"]').focus();
+    if (!$('#fm').form('validate')) {
+        $.messager.alert('Advertencia', 'Por favor, complete todos los campos obligatorios correctamente.', 'warning');
         return false;
     }
 
     var row = $('#dg').datagrid('getSelected');
     if (row) {
+        var originalCedula = row.CED_EST;
+        var cedulaInput = $('#fm [name="cedula"]');
+
+        if (cedulaInput.val() !== originalCedula) {
+            $.messager.alert('Error', 'La cédula no puede ser modificada.', 'error');
+            cedulaInput.val(originalCedula);
+            return false; 
+        }
+
         var isAnyFieldEdited = false;
         if ($('#fm [name="nombre"]').val() !== row.NOM_EST) isAnyFieldEdited = true;
         if ($('#fm [name="apellido"]').val() !== row.APE_EST) isAnyFieldEdited = true;
@@ -106,7 +79,7 @@ function saveUser() {
         if ($('#fm [name="direccion"]').val() !== row.DIR_EST) isAnyFieldEdited = true;
 
         if (!isAnyFieldEdited) {
-            showErrorMessage("Debes editar al menos uno de los campos (nombre, apellido, teléfono o dirección).",true);
+            $.messager.alert('Advertencia', 'Debes editar al menos uno de los campos (nombre, apellido, teléfono o dirección).', 'warning');
             return false;
         }
     }
@@ -118,11 +91,10 @@ function saveUser() {
             return $(this).form('validate');
         },
         success: function(result) {
-            console.log(result); 
             try {
-                var result = eval('(' + result + ')');
+                var result = JSON.parse(result);
                 if (result.errorMsg) {
-                    showErrorMessage(result.errorMsg, true);
+                    $.messager.alert('Error', result.errorMsg, 'error');
                 } else {
                     $('#dlg').dialog('close');
                     $('#dg').datagrid('reload');
@@ -131,21 +103,7 @@ function saveUser() {
                 console.error("Error al parsear JSON:", e);
             }
         }
-
     });
-}
-function validateDigitos(input) {
-    const value = input.value;
-    const isValid = /^[0-9]{10}$/.test(value); 
-    input.value = isValid ? value : value.replace(/[^0-9]/g, '');  
-    return isValid;
-}
-
-function validateLetters(input) {
-    const value = input.value;
-    const isValid = /^[a-zA-Z\s]+$/.test(value); 
-    input.value = isValid ? value : value.replace(/[^a-zA-Z\s]/g, '');
-    return isValid;
 }
 
 function destroyUser() {
@@ -168,7 +126,7 @@ function destroyUser() {
             }
         });
     } else {
-        showErrorMessage('Por favor, seleccione un estudiante de la tabla para eliminar.',false);
+        $.messager.alert('Advertencia', 'Por favor, seleccione un estudiante de la tabla para eliminar.', 'warning');
     }
 }
 
@@ -185,25 +143,30 @@ function generatePDFByCedula() {
     if (cedula) {
         window.location.href = 'report_fpdf.php?cedula=' + encodeURIComponent(cedula);
     } else {
-        showErrorMessage('Por favor, ingrese una cédula.',false);
+        $.messager.alert('Advertencia', 'Por favor, ingrese una cédula.', 'warning');
     }
 }
 
-function showErrorMessage(message, isFormError = false) {
-    var alertError;
-    if (isFormError) {
-        alertError = document.getElementById("alertErrorInForm");  
-    } else {
-        alertError = document.getElementById("alertError");  
-    }
 
-    if (alertError) { 
-        alertError.innerText = message;  
-        alertError.style.display = "block"; 
-        setTimeout(function() {
-            alertError.style.display = "none";  
-        }, 3000);  
-    } else {
-        console.error("No se encontró el elemento de alerta con el ID: " + (isFormError ? "alertErrorInForm" : "alertError"));
-    }
-}
+$(function() {
+    $.extend($.fn.validatebox.defaults.rules, {
+        cedulaValid: {
+            validator: function(value) {
+                return /^\d{10}$/.test(value);
+            },
+            message: 'La cédula debe tener exactamente 10 dígitos numéricos.'
+        },
+        lettersWithAccents: {
+            validator: function(value) {
+                return /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/.test(value);
+            },
+            message: 'Solo se permiten letras.'
+        },
+        telefonoValid: {
+            validator: function(value) {
+                return /^\d{10}$/.test(value);
+            },
+            message: 'El teléfono debe tener exactamente 10 dígitos numéricos.'
+        }
+    });
+});
