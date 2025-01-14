@@ -11,7 +11,6 @@
 <section class="cards-section">
     <h2>Equipo de Computación Visual</h2>
     <div class="cards-container">
-        <!-- Persona 1 -->
         <div class="card">
             <img src="Img/angel.jpg" alt="Ángel Ayuquina" class="card-img-top">
             <div class="card-body">
@@ -21,7 +20,6 @@
                 </p>
             </div>
         </div>
-        <!-- Persona 2 -->
         <div class="card">
             <img src="Img/jhanina.jpg" alt="Jhanina Conterón" class="card-img-top">
             <div class="card-body">
@@ -31,7 +29,6 @@
                 </p>
             </div>
         </div>
-        <!-- Persona 3 -->
         <div class="card">
             <img src="Img/dayle.jpg" alt="Daylé García" class="card-img-top">
             <div class="card-body">
@@ -41,7 +38,6 @@
                 </p>
             </div>
         </div>
-        <!-- Persona 4 -->
         <div class="card">
             <img src="Img/jose.jpg" alt="José Manzano" class="card-img-top">
             <div class="card-body">
@@ -51,7 +47,6 @@
                 </p>
             </div>
         </div>
-        <!-- Persona 5 -->
         <div class="card">
             <img src="Img/johan.jpg" alt="Johan Rodriguez" class="card-img-top">
             <div class="card-body">
@@ -61,7 +56,6 @@
                 </p>
             </div>
         </div>
-        <!-- Persona 6 -->
         <div class="card">
             <img src="Img/sebas.jpg" alt="Sebastián Ortiz" class="card-img-top">
             <div class="card-body">

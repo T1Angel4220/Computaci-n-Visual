@@ -28,7 +28,7 @@ if (isset($_GET['cedula']) && !empty($_GET['cedula'])) {
     $pdf->AddPage();
     $pdf->SetFont('Arial', '', 12);
 
-    $servername = "localhost:3309";
+    $servername = "localhost:3307";
     $username = "root";
     $password = "";
     $dbname = "cuarto";

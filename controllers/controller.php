@@ -1,7 +1,7 @@
 <?php
 class mvcController {
     public function template(){
-        include "Views/template.php";
+        include "views/template.php";
     }
 
     public function enlacesPaginasController(){

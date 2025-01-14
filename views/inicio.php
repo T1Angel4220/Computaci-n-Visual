@@ -11,7 +11,6 @@
 <section class="cards-section">
     <h2>Computación Visual</h2>
     <div class="cards-container">
-        <!-- Tarjeta 1 -->
         <div class="card">
             <img src="Img/Computacion_Visual_Concepto.png" alt="Computación Visual" class="card-img-top">
             <div class="card-body">
@@ -21,7 +20,6 @@
                 </p>
             </div>
         </div>
-        <!-- Tarjeta 2 -->
         <div class="card">
             <img src="Img/Proyecto_Visual.webp" alt="Proyecto" class="card-img-top">
             <div class="card-body">
@@ -31,7 +29,6 @@
                 </p>
             </div>
         </div>
-        <!-- Tarjeta 3 -->
         <div class="card">
             <img src="Img/Computacion_Visual_Importancia.png" alt="Importancia" class="card-img-top">
             <div class="card-body">

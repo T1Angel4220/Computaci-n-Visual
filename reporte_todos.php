@@ -9,7 +9,7 @@ use JasperPHP\JasperPHP;
 $jasper = __DIR__ . '/reports/reporteEstudiantes.jasper'; // Cambia a tu archivo .jasper correspondiente
 
 // Configuración de la base de datos
-$db_host = "localhost:3309";
+$db_host = "localhost:3307";
 $db_name = 'cuarto'; // Cambia esto por tu base de datos
 $db_user = 'root';
 $db_password = '';
